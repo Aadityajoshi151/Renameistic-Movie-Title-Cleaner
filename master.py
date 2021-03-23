@@ -4,13 +4,53 @@ import os
 def display(finaltitle,finalquality,year,filesize,choice,flag):
     if choice == 1:
         print(f"New Title: - {finaltitle}")
-    elif choice ==2:
+    elif choice == 2:
         print(f"New Title: - {finaltitle} ({year[-1]})")
-
+    elif choice == 3:
+        print(f"New Title: - {finaltitle} [{year[-1]}]")
+    elif choice == 4:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle}")
+        else:
+            print(f"New Title: - {finaltitle} ({finalquality})")
+    elif choice == 5:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle}")
+        else:
+            print(f"New Title: - {finaltitle} [{finalquality}]")
+    elif choice == 6:
+        print(f"New Title: - {finaltitle} ({filesize})")
+    elif choice == 7:
+        print(f"New Title: - {finaltitle} [{filesize}]")
+    elif choice == 8:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} ({year[-1]})")
+        else:
+            print(f"New Title: - {finaltitle} ({year[-1]}) [{finalquality}]")
+    elif choice == 9:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} [{year[-1]}]")
+        else:
+            print(f"New Title: - {finaltitle} [{year[-1]}] ({finalquality})")
+    elif choice == 10:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} [{filesize}]")
+        else:
+            print(f"New Title: - {finaltitle} ({finalquality}) [{filesize}]")
+    elif choice == 11:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} ({filesize})")
+        else:    
+            print(f"New Title: - {finaltitle} [{finalquality}] ({filesize})")
+    elif choice == 12:
+        if finalquality == "":
+            print("New Title: - "+finaltitle+" ("+year[-1]+") {"+filesize+"}")
+        else:
+            print("New Title: - "+finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+filesize+"}")
 qualities = ["480p","720p","1080p","2160p","DVDrip"]
 didnotwork = []
 counter = 0
-finalquality = ""
+
 print('''
 Press 1 For The Format: - Moviename
 Press 2 For The Format: - Moviename (Year)
@@ -28,6 +68,7 @@ Press 12 For The Format: - Moviename (Year) [Qualtity] {Filesize}
 choice = int(input())
 dir_list = os.listdir("E://Github//Movie Renamer//Samples1")
 for name in dir_list:
+    finalquality = ""
     filesize = os.path.getsize("E://Github//Movie Renamer//Samples1//"+name)
     print("Old Title: - "+name)
     flag = False
@@ -48,13 +89,14 @@ for name in dir_list:
         finaltitle = finaltitle.rstrip()
         finaltitle = string.capwords(finaltitle)
         counter+=1
-        if flag == True:
-            display(finaltitle,finalquality,year,filesize,choice,flag)
-            print("_"*80)           
-        else:
-            display(finaltitle,finalquality,year,filesize,choice,flag)
-            #print("New Title: - "+finaltitle+" ("+year[-1]+")")
-            print("_"*80)  
+        # if flag == True:
+        #     
+        #     print("_"*80)           
+        # else:
+        #     display(finaltitle,finalquality,year,filesize,choice,flag)
+        #     #print("New Title: - "+finaltitle+" ("+year[-1]+")")
+        #     print("_"*80)  
+        display(finaltitle,finalquality,year,filesize,choice,flag)
     except:
         didnotwork.append(name)
         continue
