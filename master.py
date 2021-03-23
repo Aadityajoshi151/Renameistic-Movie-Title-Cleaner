@@ -1,12 +1,16 @@
-
-
 import re
 import string
 import os 
+def display(finaltitle,finalquality,year,filesize,choice,flag):
+    if choice == 1:
+        print(f"New Title: - {finaltitle}")
+    elif choice ==2:
+        print(f"New Title: - {finaltitle} ({year[-1]})")
 
 qualities = ["480p","720p","1080p","2160p","DVDrip"]
 didnotwork = []
 counter = 0
+finalquality = ""
 print('''
 Press 1 For The Format: - Moviename
 Press 2 For The Format: - Moviename (Year)
@@ -21,8 +25,10 @@ Press 10 For The Format: - Moviename (Qualtiy) [Filesize]
 Press 11 For The Format: - Moviename [Qualtiy] (Filesize)
 Press 12 For The Format: - Moviename (Year) [Qualtity] {Filesize}
 ''')
+choice = int(input())
 dir_list = os.listdir("E://Github//Movie Renamer//Samples1")
 for name in dir_list:
+    filesize = os.path.getsize("E://Github//Movie Renamer//Samples1//"+name)
     print("Old Title: - "+name)
     flag = False
     try:
@@ -43,10 +49,11 @@ for name in dir_list:
         finaltitle = string.capwords(finaltitle)
         counter+=1
         if flag == True:
-            print("New Title: - "+finaltitle+" ("+year[-1]+") ["+finalquality+"]")
+            display(finaltitle,finalquality,year,filesize,choice,flag)
             print("_"*80)           
         else:
-            print("New Title: - "+finaltitle+" ("+year[-1]+")")
+            display(finaltitle,finalquality,year,filesize,choice,flag)
+            #print("New Title: - "+finaltitle+" ("+year[-1]+")")
             print("_"*80)  
     except:
         didnotwork.append(name)
