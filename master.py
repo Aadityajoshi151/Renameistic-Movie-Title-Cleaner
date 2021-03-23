@@ -1,17 +1,33 @@
+
+
 import re
 import string
 import os 
 
-qualities = ["480p","720p","1080p","2160p","dvdrip"]
+qualities = ["480p","720p","1080p","2160p","DVDrip"]
 didnotwork = []
 counter = 0
-dir_list = os.listdir("E://Github//Movie Renamer//Samples")
+print('''
+Press 1 For The Format: - Moviename
+Press 2 For The Format: - Moviename (Year)
+Press 3 For The Format: - Moviename [Year]
+Press 4 For The Format: - Moviename (Quality)
+Press 5 For The Format: - Moviename [Quality]
+Press 6 For The Format: - Moviename (Filesize)
+Press 7 For The Format: - Moviename [Filesize]
+Press 8 For The Format: - Moviename (Year) [Quality]
+Press 9 For The Format: - Moviename [Year] (Quality)
+Press 10 For The Format: - Moviename (Qualtiy) [Filesize]
+Press 11 For The Format: - Moviename [Qualtiy] (Filesize)
+Press 12 For The Format: - Moviename (Year) [Qualtity] {Filesize}
+''')
+dir_list = os.listdir("E://Github//Movie Renamer//Samples1")
 for name in dir_list:
     print("Old Title: - "+name)
     flag = False
     try:
         for i in qualities:
-            if name.lower().find(i)>-1:
+            if name.lower().find(i.lower())>-1:
                 finalquality = i
                 name = name.replace(finalquality,"")
                 flag = True
