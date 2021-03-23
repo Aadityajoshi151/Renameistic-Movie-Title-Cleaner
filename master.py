@@ -2,7 +2,7 @@ import re
 import string
 import os 
 
-qualities = ["480p","720p","1080p","dvdrip"]
+qualities = ["480p","720p","1080p","2160p","dvdrip"]
 didnotwork = []
 counter = 0
 dir_list = os.listdir("E://Github//Movie Renamer//Samples")
