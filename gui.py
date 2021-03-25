@@ -35,7 +35,7 @@ Label(root,text="Welcome To Movie Renamer",pady=10).pack()
 Button(root,text="Select File(s)",command=selectfiles).pack()
 Button(root,text="Select Folder(s)",command=selectfolders).pack()
 formatdd = OptionMenu(root,selectedformat,*formats)
-formatdd.config(width=30,pady=5)
+formatdd.config(width=40,pady=5)
 formatdd.pack()
 dualaudiocheckbox = Checkbutton(text = "Add Dual Audio Suffix (If Exists)", variable = dualaudiocheck,
                  onvalue = 1, offvalue = 0,)
