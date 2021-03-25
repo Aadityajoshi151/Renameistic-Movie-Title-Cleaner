@@ -9,8 +9,6 @@ def reset():
 def rename():
     print("Rename Button Clicked")
 
-
-
 root = Tk()
 selectedformat = StringVar()
 dualaudiocheck = IntVar()
@@ -32,7 +30,7 @@ formats = [
 ]
 selectedformat.set(formats[0])
 root.title("Movie Renamer")
-root.geometry("350x180")
+root.geometry("350x250")
 Label(root,text="Welcome To Movie Renamer",pady=10).pack()
 Button(root,text="Select File(s)",command=selectfiles).pack()
 Button(root,text="Select Folder(s)",command=selectfolders).pack()
@@ -45,6 +43,6 @@ subfoldercheckbox = Checkbutton(text = "Rename Files Inside Folder As Well", var
                  onvalue = 1, offvalue = 0,)
 dualaudiocheckbox.pack()
 subfoldercheckbox.pack()
-Button(root,text="Reset",command=selectfiles).pack()
-Button(root,text="Rename",command=selectfiles).pack()
+Button(root,text="Rename",command=rename,width=7,height=3).pack(side=RIGHT,padx=10,pady=10)
+Button(root,text="Reset",command=reset,width=6,height=3).pack(side=LEFT,padx=10,pady=10)
 root.mainloop()
