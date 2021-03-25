@@ -1,6 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
+import os
+import string
+import re
 
 def selectfiles():
     print("Select Files Clicked!")
@@ -11,8 +14,86 @@ def selectfolders():
 
 def reset():
     print("Reset Button Clicked!")
+
+def display(finaltitle,finalquality,year,filesize,finalformat,flag):
+    if finalformat == formats[0]:
+        print(f"New Title: - {finaltitle}")
+    elif finalformat == formats[1]:
+        print(f"New Title: - {finaltitle} ({year[-1]})")
+    elif finalformat == formats[2]:
+        print(f"New Title: - {finaltitle} [{year[-1]}]")
+    elif finalformat == formats[3]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle}")
+        else:
+            print(f"New Title: - {finaltitle} ({finalquality})")
+    elif finalformat == formats[4]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle}")
+        else:
+            print(f"New Title: - {finaltitle} [{finalquality}]")
+    elif finalformat == formats[5]:
+        print(f"New Title: - {finaltitle} ({filesize})")
+    elif finalformat == formats[6]:
+        print(f"New Title: - {finaltitle} [{filesize}]")
+    elif finalformat == formats[7]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} ({year[-1]})")
+        else:
+            print(f"New Title: - {finaltitle} ({year[-1]}) [{finalquality}]")
+    elif finalformat == formats[8]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} [{year[-1]}]")
+        else:
+            print(f"New Title: - {finaltitle} [{year[-1]}] ({finalquality})")
+    elif finalformat == formats[9]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} [{filesize}]")
+        else:
+            print(f"New Title: - {finaltitle} ({finalquality}) [{filesize}]")
+    elif finalformat == formats[10]:
+        if finalquality == "":
+            print(f"New Title: - {finaltitle} ({filesize})")
+        else:    
+            print(f"New Title: - {finaltitle} [{finalquality}] ({filesize})")
+    elif finalformat == formats[11]:
+        if finalquality == "":
+            print("New Title: - "+finaltitle+" ("+year[-1]+") {"+filesize+"}")
+        else:
+            print("New Title: - "+finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+filesize+"}")
+
 def rename():
-    print("Rename Button Clicked!")
+    global finalquality
+    global filesize
+    global flag
+    qualities = ["480p","720p","1080p","2160p","DVDrip"]
+    didnotwork = []
+    counter = 0
+    dir_list = os.listdir(root.directory)
+    for name in dir_list:
+        finalquality = ""
+        filesize = os.path.getsize(root.directory+"/"+name)
+        print("Old Title: - "+name)
+        flag = False
+        try:
+            for i in qualities:
+                if name.lower().find(i.lower())>-1:
+                    finalquality = i
+                    name = name.replace(finalquality,"")
+                    flag = True
+                    break
+            year = re.findall('([1-3][0-9]{3})', name)
+            finaltitle = name[:name.find(year[-1])-1]
+            finaltitle = finaltitle.replace("."," ")
+            finaltitle = finaltitle.replace("_"," ")
+            finaltitle = finaltitle.rstrip()
+            finaltitle = string.capwords(finaltitle)
+            counter+=1
+            display(finaltitle,finalquality,year,filesize,finalformat,flag)
+        except:
+            didnotwork.append(name)
+            continue
+
 def selectformat(event):
     global finalformat
     finalformat = selectedformat.get()
@@ -38,7 +119,9 @@ formats = [
 "Movie Name [Quality] (Filesize)",
 "Movie Name (Year) [Quality] {Filesize}"
 ]
-selectedformat.set(formats[0])
+
+
+selectedformat.set("Select A Format")
 root.title("Movie Renamer")
 root.geometry("350x250")
 root.resizable(False,False)
