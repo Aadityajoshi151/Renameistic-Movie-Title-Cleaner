@@ -1,20 +1,23 @@
 from tkinter import *
-from tkinter import ttk
 from tkinter import messagebox
+from tkinter import filedialog
 
 def selectfiles():
     print("Select Files Clicked!")
+
 def selectfolders():
-    print("Select Folders Clicked")
+    root.directory = filedialog.askdirectory()
+    print(root.directory)
+
 def reset():
-    print("Reset Button Clicked")
+    print("Reset Button Clicked!")
 def rename():
-    print("Rename Button Clicked")
+    print("Rename Button Clicked!")
 def selectformat(event):
     global finalformat
     finalformat = selectedformat.get()
     if finalformat.find("Quality")>-1:
-        messagebox.showinfo("Title","You Have Selected Format Which Involves Quality. If Quality Is Not Present In The Title, It Will Be Omitted")
+        messagebox.showinfo("Title","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
 
 root = Tk()
 selectedformat = StringVar()
@@ -33,11 +36,12 @@ formats = [
 "Movie Name [Year] (Quality)",
 "Movie Name (Quality) [Filesize]",
 "Movie Name [Quality] (Filesize)",
-"Movie Name (Year) [Qualtity] {Filesize}"
+"Movie Name (Year) [Quality] {Filesize}"
 ]
 selectedformat.set(formats[0])
 root.title("Movie Renamer")
 root.geometry("350x250")
+root.resizable(False,False)
 Label(root,text="Welcome To Movie Renamer",pady=10).pack()
 Button(root,text="Select File(s)",command=selectfiles).pack()
 Button(root,text="Select Folder(s)",command=selectfolders).pack()
