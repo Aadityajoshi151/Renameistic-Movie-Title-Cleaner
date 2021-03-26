@@ -4,6 +4,7 @@ from tkinter import filedialog
 import os
 import string
 import re
+import pathlib
 
 def selectfiles():
     global dir_list
@@ -21,60 +22,83 @@ def selectfolders():
     title.config(text=root.directory)
     dir_list = os.listdir(root.directory)
 
-def display(finaltitle,finalquality,year,filesize,finalformat,flag):
+def display(finaltitle,finalquality,year,filesize,finalformat,flag,temp,extension):
     if finalformat == formats[0]:
         print(f"New Title: - {finaltitle}")
+        os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+extension)
     elif finalformat == formats[1]:
         print(f"New Title: - {finaltitle} ({year[-1]})")
+        os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+year[-1]+")"+extension)
     elif finalformat == formats[2]:
         print(f"New Title: - {finaltitle} [{year[-1]}]")
+        os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+year[-1]+"]"+extension)
     elif finalformat == formats[3]:
         if finalquality == "":
             print(f"New Title: - {finaltitle}")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+extension)
         else:
             print(f"New Title: - {finaltitle} ({finalquality})")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+finalquality+")"+extension)
     elif finalformat == formats[4]:
         if finalquality == "":
             print(f"New Title: - {finaltitle}")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+extension)
         else:
             print(f"New Title: - {finaltitle} [{finalquality}]")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+finalquality+"]"+extension)
     elif finalformat == formats[5]:
         print(f"New Title: - {finaltitle} ({filesize})")
+        os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+str(filesize)+")"+extension)
     elif finalformat == formats[6]:
         print(f"New Title: - {finaltitle} [{filesize}]")
+        os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+str(filesize)+"]"+extension)
     elif finalformat == formats[7]:
         if finalquality == "":
             print(f"New Title: - {finaltitle} ({year[-1]})")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+year[-1]+")"+extension)
         else:
             print(f"New Title: - {finaltitle} ({year[-1]}) [{finalquality}]")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+year[-1]+")"+" ["+finalquality+"]"+extension)
     elif finalformat == formats[8]:
         if finalquality == "":
             print(f"New Title: - {finaltitle} [{year[-1]}]")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+year[-1]+"]"+extension)
         else:
             print(f"New Title: - {finaltitle} [{year[-1]}] ({finalquality})")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+year[-1]+"]"+" ("+finalquality+")"+extension)
     elif finalformat == formats[9]:
         if finalquality == "":
             print(f"New Title: - {finaltitle} [{filesize}]")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+str(filesize)+"]"+extension)
         else:
             print(f"New Title: - {finaltitle} ({finalquality}) [{filesize}]")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+finalquality+") ["+str(filesize)+"]"+extension)
     elif finalformat == formats[10]:
         if finalquality == "":
             print(f"New Title: - {finaltitle} ({filesize})")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+str(filesize)+")"+extension)
         else:    
             print(f"New Title: - {finaltitle} [{finalquality}] ({filesize})")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ["+finalquality+"] ("+str(filesize)+")"+extension)
     elif finalformat == formats[11]:
         if finalquality == "":
             print("New Title: - "+finaltitle+" ("+year[-1]+") {"+filesize+"}")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+year[-1]+") {"+str(filesize)+"}"+extension)
         else:
             print("New Title: - "+finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+filesize+"}")
+            os.rename(root.directory+"/"+temp,root.directory+"/"+finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+str(filesize)+"}"+extension)
 
 def rename():
     global finalquality
     global filesize
     global flag
+    global extension
     qualities = ["480p","720p","1080p","2160p","DVDrip"]
     counter = 0
     for name in dir_list:
+        temp = name
+        extension = ""
+        extension = pathlib.Path(temp).suffix
         finalquality = ""
         filesize = os.path.getsize(root.directory+"/"+name)
         print("Old Title: - "+name)
@@ -93,7 +117,7 @@ def rename():
             finaltitle = finaltitle.rstrip()
             finaltitle = string.capwords(finaltitle)
             counter+=1
-            display(finaltitle,finalquality,year,filesize,finalformat,flag)
+            display(finaltitle,finalquality,year,filesize,finalformat,flag,temp,extension)
         except:
             continue
     if counter!=len(dir_list):
