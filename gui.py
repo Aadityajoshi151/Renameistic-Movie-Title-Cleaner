@@ -21,9 +21,6 @@ def selectfolders():
     title.config(text=root.directory)
     dir_list = os.listdir(root.directory)
 
-def reset():
-    print("Reset Button Clicked!")
-
 def display(finaltitle,finalquality,year,filesize,finalformat,flag):
     if finalformat == formats[0]:
         print(f"New Title: - {finaltitle}")
@@ -148,5 +145,5 @@ subfoldercheckbox = Checkbutton(text = "Rename Files Inside Folder As Well", var
 dualaudiocheckbox.pack()
 subfoldercheckbox.pack()
 Button(root,text="Rename",command=rename,width=7,height=3).pack(side=RIGHT,padx=10,pady=10)
-Button(root,text="Reset",command=reset,width=6,height=3).pack(side=LEFT,padx=10,pady=10)
+#Button(root,text="Reset",command=reset,width=6,height=3).pack(side=LEFT,padx=10,pady=10)
 root.mainloop()
