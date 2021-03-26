@@ -59,7 +59,6 @@ def display(finaltitle,finalquality,year,filesize,finalformat,flag):
         else:    
             print(f"New Title: - {finaltitle} [{finalquality}] ({filesize})")
     elif finalformat == formats[11]:
-        print("Inside 11")
         if finalquality == "":
             print("New Title: - "+finaltitle+" ("+year[-1]+") {"+filesize+"}")
         else:
@@ -70,7 +69,6 @@ def rename():
     global filesize
     global flag
     qualities = ["480p","720p","1080p","2160p","DVDrip"]
-    didnotwork = []
     counter = 0
     for name in dir_list:
         finalquality = ""
@@ -93,7 +91,6 @@ def rename():
             counter+=1
             display(finaltitle,finalquality,year,filesize,finalformat,flag)
         except:
-            didnotwork.append(name)
             continue
     messagebox.showinfo("Result",f"Successfully changed {counter}/{len(dir_list)} names.\nSome names were not changed due to lack of information in the title.")
 
