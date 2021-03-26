@@ -6,7 +6,14 @@ import string
 import re
 
 def selectfiles():
-    print("Select Files Clicked!")
+    global dir_list
+    dir_list = []
+    files = filedialog.askopenfilenames(parent=root, title='Select File(s)')
+    files = list(files)
+    for i in files:
+        temp = i.split("/")
+        dir_list.append(temp[-1])
+    root.directory = "/".join(temp[i] for i in range(0,len(temp)-1))
 
 def selectfolders():
     global dir_list
@@ -92,8 +99,10 @@ def rename():
             display(finaltitle,finalquality,year,filesize,finalformat,flag)
         except:
             continue
-    messagebox.showinfo("Result",f"Successfully changed {counter}/{len(dir_list)} names.\nSome names were not changed due to lack of information in the title.")
-
+    if counter!=len(dir_list):
+        messagebox.showinfo("Result",f"Successfully changed {counter}/{len(dir_list)} names.\nSome names were not changed due to lack of information in the title.")
+    else:
+        messagebox.showinfo("Result",f"Successfully changed {counter}/{len(dir_list)} names.")
 def selectformat(event):
     global finalformat
     finalformat = selectedformat.get()
