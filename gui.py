@@ -9,8 +9,10 @@ def selectfiles():
     print("Select Files Clicked!")
 
 def selectfolders():
+    global dir_list
     root.directory = filedialog.askdirectory()
-    print(root.directory)
+    title.config(text=root.directory)
+    dir_list = os.listdir(root.directory)
 
 def reset():
     print("Reset Button Clicked!")
@@ -57,6 +59,7 @@ def display(finaltitle,finalquality,year,filesize,finalformat,flag):
         else:    
             print(f"New Title: - {finaltitle} [{finalquality}] ({filesize})")
     elif finalformat == formats[11]:
+        print("Inside 11")
         if finalquality == "":
             print("New Title: - "+finaltitle+" ("+year[-1]+") {"+filesize+"}")
         else:
@@ -69,7 +72,6 @@ def rename():
     qualities = ["480p","720p","1080p","2160p","DVDrip"]
     didnotwork = []
     counter = 0
-    dir_list = os.listdir(root.directory)
     for name in dir_list:
         finalquality = ""
         filesize = os.path.getsize(root.directory+"/"+name)
@@ -93,6 +95,7 @@ def rename():
         except:
             didnotwork.append(name)
             continue
+    messagebox.showinfo("Result",f"Successfully changed {counter}/{len(dir_list)} names.\nSome names were not changed due to lack of information in the title.")
 
 def selectformat(event):
     global finalformat
@@ -106,7 +109,7 @@ dualaudiocheck = IntVar()
 subfoldercheck = IntVar()
 
 formats = [
-    "Movie Name",
+"Movie Name",
 "Movie Name (Year)",
 "Movie Name [Year]",
 "Movie Name (Quality)",
@@ -125,9 +128,10 @@ selectedformat.set("Select A Format")
 root.title("Movie Renamer")
 root.geometry("350x250")
 root.resizable(False,False)
-Label(root,text="Welcome To Movie Renamer",pady=10).pack()
+title = Label(root,text="Welcome To Movie Renamer",pady=10)
+title.pack()
 Button(root,text="Select File(s)",command=selectfiles).pack()
-Button(root,text="Select Folder(s)",command=selectfolders).pack()
+Button(root,text="Select Folder",command=selectfolders).pack()
 formatdd = OptionMenu(root,selectedformat,*formats,command=selectformat)
 formatdd.config(width=40,pady=5)
 formatdd.pack(pady=5)
