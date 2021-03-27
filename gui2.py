@@ -10,6 +10,20 @@ def combinename():
         return (f"{finaltitle}")
     elif finalformat == formats[1]:
         return (f"{finaltitle} ({year[-1]})")
+    elif finalformat == formats[2]:
+        return (f"{finaltitle} [{year[-1]}]")
+    elif finalformat == formats[3]:
+        if finalquality == "":
+            return (f"{finaltitle}")
+        else:
+            return (f"{finaltitle} ({finalquality})")
+    elif finalformat == formats[4]:
+        if finalquality == "":
+            return (f"{finaltitle}")
+        else:
+            return (f"{finaltitle} [{finalquality}]")
+    elif finalformat == formats[5]:
+        return (f"{finaltitle} ({filesize})")
 
 def browse():
     root.directory = filedialog.askdirectory()
