@@ -4,6 +4,7 @@ from tkinter import filedialog
 import os
 import re
 import string
+import pathlib
 
 def combinename():
     if finalformat == formats[0]:
@@ -24,7 +25,33 @@ def combinename():
             return (f"{finaltitle} [{finalquality}]")
     elif finalformat == formats[5]:
         return (f"{finaltitle} ({filesize})")
-
+    elif finalformat == formats[6]:
+        return (f"{finaltitle} [{filesize}]")
+    elif finalformat == formats[7]:
+        if finalquality == "":
+            return (f"{finaltitle} ({year[-1]})")
+        else:
+            return (f"{finaltitle} ({year[-1]}) [{finalquality}]")
+    elif finalformat == formats[8]:
+        if finalquality == "":
+            return (f"{finaltitle} [{year[-1]}]")
+        else:
+            return (f"{finaltitle} [{year[-1]}] ({finalquality})")
+    elif finalformat == formats[9]:
+        if finalquality == "":
+            return (f"{finaltitle} [{filesize}]")
+        else:
+            return (f"{finaltitle} ({finalquality}) [{filesize}]")
+    elif finalformat == formats[10]:
+        if finalquality == "":
+            return (f"{finaltitle} ({filesize})")
+        else:    
+            return (f"{finaltitle} [{finalquality}] ({filesize})")
+    elif finalformat == formats[11]:
+        if finalquality == "":
+            return (f"{finaltitle} ({year[-1]}) {{{filessize}}}")
+        else:
+            return (f"{finaltitle} ({year[-1]}) [{finalquality}] {{{filessize}}}")    
 def browse():
     root.directory = filedialog.askdirectory()
     pathfield.insert(0,root.directory)
@@ -42,10 +69,6 @@ def rename():
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
     for name in names:
-        # if os.path.isfile(root.directory+"/"+name):
-        #     print(name+" Is A File")
-        # elif os.path.isdir(root.directory+"/"+name):
-        #     print(name+" Is A Folder")
         temp = name
         finalquality = ""
         filesize = os.path.getsize(root.directory+"/"+name)
@@ -69,6 +92,12 @@ def rename():
         except:
             continue
         print(winnername)
+        if os.path.isdir(root.directory+"/"+temp):
+            os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
+        elif os.path.isfile(root.directory+"/"+temp):
+            extension = pathlib.Path(temp).suffix
+            os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
+
 
 
 def selectformat(event):
