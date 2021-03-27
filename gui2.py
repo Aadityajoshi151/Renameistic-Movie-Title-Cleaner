@@ -2,6 +2,14 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 import os
+import re
+import string
+
+def combinename():
+    if finalformat == formats[0]:
+        return (f"{finaltitle}")
+    elif finalformat == formats[1]:
+        return (f"{finaltitle} ({year[-1]})")
 
 def browse():
     root.directory = filedialog.askdirectory()
@@ -10,15 +18,47 @@ def browse():
         displaybox.insert(END,i)
 def rename():
     names = []
+    global finalquality
+    global filesize
+    global flag
+    global year
+    global finaltitle
+    qualities = ["480p","720p","1080p","2160p","DVDrip"]
+    counter = 0
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
-    for i in names:
-        if os.path.isfile(root.directory+"/"+i):
-            print(i+" Is A File")
-        elif os.path.isdir(root.directory+"/"+i):
-            print(i+" Is A Folder")
+    for name in names:
+        # if os.path.isfile(root.directory+"/"+name):
+        #     print(name+" Is A File")
+        # elif os.path.isdir(root.directory+"/"+name):
+        #     print(name+" Is A Folder")
+        temp = name
+        finalquality = ""
+        filesize = os.path.getsize(root.directory+"/"+name)
+        print("Old Title: - "+name)
+        flag = False
+        try:
+            for i in qualities:
+                if name.lower().find(i.lower())>-1:
+                    finalquality = i
+                    name = name.replace(finalquality,"")
+                    flag = True
+                    break
+            year = re.findall('([1-3][0-9]{3})', name)
+            finaltitle = name[:name.find(year[-1])-1]
+            finaltitle = finaltitle.replace("."," ")
+            finaltitle = finaltitle.replace("_"," ")
+            finaltitle = finaltitle.rstrip()
+            finaltitle = string.capwords(finaltitle)
+            counter+=1
+            winnername = combinename()
+        except:
+            continue
+        print(winnername)
+
 
 def selectformat(event):
+    global finalformat
     finalformat = selectedformat.get()
     if finalformat.find("Quality")>-1:
         messagebox.showinfo("Title","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
@@ -44,6 +84,7 @@ formats = [
 "Movie Name [Quality] (Filesize)",
 "Movie Name (Year) [Quality] {Filesize}"
 ]
+
 pathfield = Entry(root,width=60)
 pathfield.pack(padx=10,pady=10)
 
