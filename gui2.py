@@ -57,6 +57,11 @@ def browse():
     pathfield.insert(0,root.directory)
     for i in os.listdir(root.directory):
         displaybox.insert(END,i)
+    selectallbtn.config(state=ACTIVE)
+
+def selectall():
+    displaybox.select_set(0,END)
+
 def rename():
     names = []
     global finalquality
@@ -68,6 +73,7 @@ def rename():
     counter = 0
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
+    print(names)
     for name in names:
         temp = name
         finalquality = ""
@@ -109,7 +115,7 @@ def selectformat(event):
 
 root = Tk()
 root.title("Movie Renamer")
-root.geometry("400x400")
+root.geometry("400x450")
 
 selectedformat = StringVar()
 selectedformat.set("Select A Format")
@@ -136,6 +142,9 @@ browzebutton.pack(padx=10,pady=10)
 
 displaybox = Listbox(root,width=60,selectmode=EXTENDED)
 displaybox.pack()
+
+selectallbtn = Button(root,text="Select All",state=DISABLED,command=selectall)
+selectallbtn.pack(padx=10,pady=10)
 
 formatdd = OptionMenu(root,selectedformat,*formats,command=selectformat)
 formatdd.config(width=40,pady=5)
