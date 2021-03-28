@@ -52,15 +52,22 @@ def combinename():
             return (f"{finaltitle} ({year[-1]}) {{{filessize}}}")
         else:
             return (f"{finaltitle} ({year[-1]}) [{finalquality}] {{{filessize}}}")    
+def populate():
+    for i in os.listdir(root.directory):
+        if os.path.isdir(root.directory+"/"+i):
+            displaybox.insert(END,"📁 "+i)
+        elif os.path.isfile(root.directory+"/"+i):
+            displaybox.insert(END,"📄 "+i)
+
 def browse():
     root.directory = filedialog.askdirectory()
     pathfield.insert(0,root.directory)
-    for i in os.listdir(root.directory):
-        displaybox.insert(END,i)
+    populate()
     selectallbtn.config(state=ACTIVE)
 
 def selectall():
     displaybox.select_set(0,END)
+
 
 def rename():
     names = []
@@ -75,6 +82,8 @@ def rename():
         names.append(displaybox.get(i))
     print(names)
     for name in names:
+        name=name.replace("📁 ","")
+        name=name.replace("📄 ","")
         temp = name
         finalquality = ""
         #FILE SIZE CODE BEGINS HERE
@@ -113,7 +122,6 @@ def rename():
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
-
 
 
 def selectformat(event):
