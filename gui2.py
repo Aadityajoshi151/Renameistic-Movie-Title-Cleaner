@@ -119,6 +119,10 @@ def rename():
         print(winnername)
         if os.path.isdir(root.directory+"/"+temp):
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
+            if subfoldercheck.get() == 1:
+                for j in os.listdir(root.directory+"/"+winnername):
+                    subextension = pathlib.Path(j).suffix
+                    os.rename(root.directory+"/"+winnername+"/"+j,root.directory+"/"+winnername+"/"+winnername+subextension)
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
@@ -133,13 +137,14 @@ def selectformat(event):
 
 root = Tk()
 root.title("Movie Renamer")
-root.geometry("400x450")
+root.geometry("400x500")
 
 scrollframe = Frame(root)
 yscroll = Scrollbar(scrollframe,orient=VERTICAL)
 xscroll = Scrollbar(scrollframe,orient=HORIZONTAL)
 
 selectedformat = StringVar()
+subfoldercheck = IntVar()
 selectedformat.set("Select A Format")
 formats = [
 "Movie Name",
@@ -177,6 +182,10 @@ selectallbtn.pack(padx=10,pady=10)
 formatdd = OptionMenu(root,selectedformat,*formats,command=selectformat)
 formatdd.config(width=40,pady=5)
 formatdd.pack(pady=10)
+
+subfoldercheckbox = Checkbutton(text = "Rename Video Files Inside Folder As Well (Only 1 Level)", variable = subfoldercheck,
+                 onvalue = 1, offvalue = 0,)
+subfoldercheckbox.pack()
 
 renamebutton = Button(root,text="Rename",padx=15,pady=15,command=rename)
 renamebutton.pack(side=RIGHT,padx=10,pady=10)

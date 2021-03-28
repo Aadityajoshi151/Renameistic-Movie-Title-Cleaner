@@ -164,8 +164,7 @@ formatdd.config(width=40,pady=5)
 formatdd.pack(pady=5)
 dualaudiocheckbox = Checkbutton(text = "Add Dual Audio Suffix (If Exists)", variable = dualaudiocheck,
                  onvalue = 1, offvalue = 0,)
-subfoldercheckbox = Checkbutton(text = "Rename Files Inside Folder As Well", variable = subfoldercheck,
-                 onvalue = 1, offvalue = 0,)
+
 dualaudiocheckbox.pack()
 subfoldercheckbox.pack()
 Button(root,text="Rename",command=rename,width=7,height=3).pack(side=RIGHT,padx=10,pady=10)
