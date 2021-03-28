@@ -77,7 +77,16 @@ def rename():
     for name in names:
         temp = name
         finalquality = ""
-        filesize = os.path.getsize(root.directory+"/"+name)
+        #FILE SIZE CODE BEGINS HERE
+        filesize = os.path.getsize(root.directory+"/"+temp)
+        n = 0
+        power=2**10
+        power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
+        while filesize > power:
+            filesize /= power
+            n += 1
+        filesize=str(str(round(filesize,1))+" "+str(power_labels[n])+"B")
+        #FILE SIZE CODE ENDS HERE
         print("Old Title: - "+name)
         flag = False
         try:
@@ -94,6 +103,7 @@ def rename():
             finaltitle = finaltitle.rstrip()
             finaltitle = string.capwords(finaltitle)
             counter+=1
+
             winnername = combinename()
         except:
             continue
@@ -144,11 +154,7 @@ pathfield.pack(padx=10,pady=10)
 browzebutton = Button(root,text="Browse",command=browse)
 browzebutton.pack(padx=10,pady=10)
 
-
-
 displaybox = Listbox(scrollframe,width=60,selectmode=EXTENDED,yscrollcommand=yscroll.set,xscrollcommand=xscroll.set)
-
-
 
 yscroll.config(command=displaybox.yview)
 yscroll.pack(side=RIGHT,fill=Y)
@@ -156,9 +162,6 @@ xscroll.config(command=displaybox.xview)
 xscroll.pack(side=BOTTOM,fill=X)
 scrollframe.pack()
 displaybox.pack()
-
-
-
 
 selectallbtn = Button(root,text="Select All",state=DISABLED,command=selectall)
 selectallbtn.pack(padx=10,pady=10)
