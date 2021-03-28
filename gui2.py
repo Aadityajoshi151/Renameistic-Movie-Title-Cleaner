@@ -117,6 +117,10 @@ root = Tk()
 root.title("Movie Renamer")
 root.geometry("400x450")
 
+scrollframe = Frame(root)
+yscroll = Scrollbar(scrollframe,orient=VERTICAL)
+xscroll = Scrollbar(scrollframe,orient=HORIZONTAL)
+
 selectedformat = StringVar()
 selectedformat.set("Select A Format")
 formats = [
@@ -140,8 +144,21 @@ pathfield.pack(padx=10,pady=10)
 browzebutton = Button(root,text="Browse",command=browse)
 browzebutton.pack(padx=10,pady=10)
 
-displaybox = Listbox(root,width=60,selectmode=EXTENDED)
+
+
+displaybox = Listbox(scrollframe,width=60,selectmode=EXTENDED,yscrollcommand=yscroll.set,xscrollcommand=xscroll.set)
+
+
+
+yscroll.config(command=displaybox.yview)
+yscroll.pack(side=RIGHT,fill=Y)
+xscroll.config(command=displaybox.xview)
+xscroll.pack(side=BOTTOM,fill=X)
+scrollframe.pack()
 displaybox.pack()
+
+
+
 
 selectallbtn = Button(root,text="Select All",state=DISABLED,command=selectall)
 selectallbtn.pack(padx=10,pady=10)
