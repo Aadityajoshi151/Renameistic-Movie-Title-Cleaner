@@ -132,7 +132,8 @@ def rename():
                 for j in os.listdir(root.directory+"/"+winnername):
                     if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
                         subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
-                os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix)
+                subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
+                os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
