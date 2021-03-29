@@ -86,8 +86,14 @@ def rename():
         name=name.replace("📄 ","")
         temp = name
         finalquality = ""
+        filesize=0
         #FILE SIZE CODE BEGINS HERE
-        filesize = os.path.getsize(root.directory+"/"+temp)
+        if os.path.isdir(root.directory+"/"+temp):
+            for ele in os.scandir(root.directory+"/"+temp):
+                filesize+=os.path.getsize(ele)
+        else:      
+            filesize = os.path.getsize(root.directory+"/"+temp)
+        print(filesize)
         n = 0
         power=2**10
         power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
@@ -95,6 +101,7 @@ def rename():
             filesize /= power
             n += 1
         filesize=str(str(round(filesize,1))+" "+str(power_labels[n])+"B")
+        print(filesize)
         #FILE SIZE CODE ENDS HERE
         print("Old Title: - "+name)
         flag = False
@@ -120,9 +127,12 @@ def rename():
         if os.path.isdir(root.directory+"/"+temp):
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
             if subfoldercheck.get() == 1:
+                commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
+                subfiles = {}          
                 for j in os.listdir(root.directory+"/"+winnername):
-                    subextension = pathlib.Path(j).suffix
-                    os.rename(root.directory+"/"+winnername+"/"+j,root.directory+"/"+winnername+"/"+winnername+subextension)
+                    if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
+                        subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
+                os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix)
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
