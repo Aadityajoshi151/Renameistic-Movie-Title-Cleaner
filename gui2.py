@@ -198,7 +198,7 @@ subfoldercheckbox = Checkbutton(text = "Rename Video Files Inside Folder As Well
                  onvalue = 1, offvalue = 0,)
 subfoldercheckbox.pack()
 
-renamebutton = Button(root,text="Rename",padx=15,pady=15,command=rename)
+renamebutton = Button(root,text="Rename",padx=15,pady=15,command=rename,fg="green")
 renamebutton.pack(side=RIGHT,padx=10,pady=10)
 
 root.mainloop()
