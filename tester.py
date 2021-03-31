@@ -68,7 +68,7 @@ counter = 0
 # Press 12 For The Format: - Moviename (Year) [Qualtity] {Filesize}
 # ''')
 choice = 8
-with open("100Test.txt", 'r') as file_handle:
+with open("100Test.txt", 'r',encoding="utf-8") as file_handle:
     # read file content into list
     dir_list = file_handle.readlines()
 dir_list = [line.strip() for line in dir_list]
