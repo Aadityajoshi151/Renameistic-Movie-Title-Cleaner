@@ -1,5 +1,5 @@
 import re
-import string
+from titlecase import titlecase
 import os 
 from pandas import *
 
@@ -109,7 +109,7 @@ for name in dir_list:
         if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
            finaltitle =finaltitle.split(" ", 1)[1]
         
-        finaltitle = string.capwords(finaltitle)
+        finaltitle = titlecase(finaltitle)
         #counter+=1
         # if flag == True:
         #     
