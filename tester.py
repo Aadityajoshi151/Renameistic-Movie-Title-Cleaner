@@ -101,6 +101,10 @@ for name in dir_list:
         finaltitle = finaltitle.replace("."," ")
         finaltitle = finaltitle.replace("_"," ")
         finaltitle = finaltitle.rstrip()
+        #removing [anything] prefix from title if present
+        if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
+           finaltitle =finaltitle.split(" ", 1)[1]
+        
         finaltitle = string.capwords(finaltitle)
         #counter+=1
         # if flag == True:
