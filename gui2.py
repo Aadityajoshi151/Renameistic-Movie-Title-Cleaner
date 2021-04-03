@@ -132,7 +132,6 @@ def rename():
             
             finaltitle = titlecase(finaltitle)
             counter+=1
-
             winnername = combinename()
         except:
             continue
