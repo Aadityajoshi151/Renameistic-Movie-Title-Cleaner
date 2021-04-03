@@ -3,8 +3,23 @@ from tkinter import messagebox
 from tkinter import filedialog
 import os
 import re
+import webbrowser
+import urllib.request
 from titlecase import titlecase
 import pathlib
+
+def update():
+    try:
+        newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Anagram-Generator/master/Version.txt").read()
+        newversion = newversion.decode('utf-8').split()[0]
+        if currversion == newversion:
+            messagebox.showinfo("Latest Version Detected","You are running the latest version. No update required.")
+        else:
+            ans = messagebox.askyesno("New Version Available","A newer version (v"+newversion+") is available for download. Would you like to download it now?")
+            if ans:
+                webbrowser.open_new("www.google.co.in")
+    except:
+        messagebox.showerror("An Error Occurred","There was a problem connecting with the server. Please check your internet connection or try again later.")
 
 def combinename():
     if finalformat == formats[0]:
@@ -159,7 +174,9 @@ def selectformat(event):
 
 
 root = Tk()
-root.title("Movie Renamer")
+global currversion
+currversion = "1.0"
+root.title("Movie Renamer "+currversion)
 root.geometry("400x500")
 
 scrollframe = Frame(root)
@@ -209,6 +226,9 @@ formatdd.pack(pady=10)
 subfoldercheckbox = Checkbutton(text = "Rename Video Files Inside Folder As Well (Only 1 Level)", variable = subfoldercheck,
                  onvalue = 1, offvalue = 0,)
 subfoldercheckbox.pack()
+
+updatebutton = Button(root,text="Check For Updates",command=update)
+updatebutton.pack(side=LEFT,padx=10,pady=10)
 
 renamebutton = Button(root,text="Rename",padx=15,pady=15,command=rename,fg="green")
 renamebutton.pack(side=RIGHT,padx=10,pady=10)
