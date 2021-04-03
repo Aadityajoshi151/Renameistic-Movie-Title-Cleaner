@@ -3,7 +3,7 @@ from tkinter import messagebox
 from tkinter import filedialog
 import os
 import re
-import string
+from titlecase import titlecase
 import pathlib
 
 def combinename():
@@ -129,7 +129,8 @@ def rename():
             #removing [anything] prefix from title if present
             if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
                 finaltitle =finaltitle.split(" ", 1)[1]
-            finaltitle = string.capwords(finaltitle)
+            
+            finaltitle = titlecase(finaltitle)
             counter+=1
 
             winnername = combinename()
