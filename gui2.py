@@ -112,12 +112,15 @@ def rename():
                     name = name.replace(finalquality,"")
                     flag = True
                     break
-            year = re.findall('([1-3][0-9]{3})', name)
-            while True:
-                if int(year[-1]) < 1880:
-                    del year[-1]
-                else:
-                    break
+            if re.search("\d{4}-\d{4}", name): #A Collection
+                year = re.findall("\d{4}-\d{4}", name)
+            else:
+                year = re.findall('([1-3][0-9]{3})', name) #Individual
+                while True:
+                    if int(year[-1]) < 1880:
+                        del year[-1]
+                    else:
+                        break
             finaltitle = name[:name.find(year[-1])-1]
             finaltitle = finaltitle.replace("."," ")
             finaltitle = finaltitle.replace("_"," ")
