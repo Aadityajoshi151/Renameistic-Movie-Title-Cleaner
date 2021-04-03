@@ -112,6 +112,7 @@ def rename():
                     name = name.replace(finalquality,"")
                     flag = True
                     break
+            #Finding out if folder is individual or collection
             if re.search("\d{4}-\d{4}", name): #A Collection
                 year = re.findall("\d{4}-\d{4}", name)
             else:
@@ -125,6 +126,9 @@ def rename():
             finaltitle = finaltitle.replace("."," ")
             finaltitle = finaltitle.replace("_"," ")
             finaltitle = finaltitle.rstrip()
+            #removing [anything] prefix from title if present
+            if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
+                finaltitle =finaltitle.split(" ", 1)[1]
             finaltitle = string.capwords(finaltitle)
             counter+=1
 
