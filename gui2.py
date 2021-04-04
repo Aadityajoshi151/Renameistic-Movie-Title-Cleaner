@@ -21,6 +21,11 @@ def update():
     except:
         messagebox.showerror("An Error Occurred","There was a problem connecting with the server. Please check your internet connection or try again later.")
 
+
+def enterpressed(event=None):
+    root.directory = pathfield.get()
+    populate()
+
 def combinename():
     if finalformat == formats[0]:
         return (f"{finaltitle}")
@@ -205,6 +210,7 @@ formats = [
 
 pathfield = Entry(root,width=60)
 pathfield.pack(padx=10,pady=10)
+pathfield.bind("<Return>",enterpressed)
 
 browzebutton = Button(root,text="Browse",command=browse)
 browzebutton.pack(padx=10,pady=10)
