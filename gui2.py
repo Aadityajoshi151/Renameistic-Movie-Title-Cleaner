@@ -68,6 +68,7 @@ def combinename():
         else:
             return (f"{finaltitle} ({year[-1]}) [{finalquality}] {{{filessize}}}")    
 def populate():
+    displaybox.delete(0,END)
     for i in os.listdir(root.directory):
         if os.path.isdir(root.directory+"/"+i):
             displaybox.insert(END,"📁 "+i)
@@ -76,6 +77,7 @@ def populate():
 
 def browse():
     root.directory = filedialog.askdirectory()
+    pathfield.delete(0,END)
     pathfield.insert(0,root.directory)
     populate()
     selectallbtn.config(state=ACTIVE)
