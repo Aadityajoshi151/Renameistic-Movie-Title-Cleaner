@@ -171,6 +171,7 @@ def rename():
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
+        populate()
 
 
 def selectformat(event):
