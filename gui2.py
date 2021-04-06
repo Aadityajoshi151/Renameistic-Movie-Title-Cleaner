@@ -9,6 +9,8 @@ import urllib.request
 from titlecase import titlecase
 import pathlib
 
+def openportfolio():
+    webbrowser.open_new("https://aadityajoshi151.github.io/")
 def update():
     try:
         newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Anagram-Generator/master/Version.txt").read()
@@ -214,6 +216,15 @@ currversion = "1.0"
 root.title("Movie Renamer "+currversion)
 root.geometry("400x500")
 
+extras = Menu(root)
+root.config(menu=extras)
+extrasmenu = Menu(extras,tearoff=False)
+extras.add_cascade(label="Extras",menu=extrasmenu)
+extrasmenu.add_command(label = "🌐 Check for Updates",command=update)
+extrasmenu.add_command(label = "👦 About",command=openportfolio)
+extrasmenu.add_command(label = "📮 Contact Developer")
+extrasmenu.add_command(label = "💰 Donate")
+
 scrollframe = Frame(root)
 yscroll = Scrollbar(scrollframe,orient=VERTICAL)
 xscroll = Scrollbar(scrollframe,orient=HORIZONTAL)
@@ -235,6 +246,8 @@ formats = [
 "Movie Name [Quality] (Filesize)",
 "Movie Name (Year) [Quality] {Filesize}"
 ]
+
+
 
 pathfield = ttk.Entry(root,width=60)
 pathfield.pack(padx=10,pady=10)
@@ -262,9 +275,6 @@ formatdd.pack(pady=10)
 subfoldercheckbox = ttk.Checkbutton(text = "Rename Video Files Inside Folder As Well (Only 1 Level)", variable = subfoldercheck,
                  onvalue = 1, offvalue = 0,)
 subfoldercheckbox.pack()
-
-updatebutton = Button(root,text="Check For Updates",command=update)
-updatebutton.pack(side=LEFT,padx=10,pady=10)
 
 renamebutton = ttk.Button(root,text="Rename",command=rename)
 renamebutton.pack(side=RIGHT,padx=10,pady=10)
