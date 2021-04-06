@@ -90,15 +90,36 @@ def browse():
 def selectall():
     displaybox.select_set(0,END)
 
+def displaydidnotwork():
+    dnw = Toplevel()
+    dnw.attributes("-toolwindow", True)
+    newscrollframe = Frame(dnw)
+    newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
+    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The Following {len(names)-counter} files were not renamed due to lack of information in their title")
+    lbl.pack(padx=10,pady=10)
+    newdisplaybox = Listbox(newscrollframe,width=60,selectmode=EXTENDED,yscrollcommand=newyscroll.set,height=5)
+    newyscroll.config(command=newdisplaybox.yview)
+    newyscroll.pack(side=RIGHT,fill=Y)
+    newscrollframe.pack()
+    newdisplaybox.pack()
+    for x in didnotwork:
+        newdisplaybox.insert(END,x)
+    okbtn = Button(dnw,text="OK",command=dnw.destroy,padx=10)
+    okbtn.pack(padx=10,pady=10)
+
 
 def rename():
+    global names
     names = []
     global finalquality
     global filesize
     global flag
     global year
     global finaltitle
+    global didnotwork
+    global counter
     qualities = ["480p","720p","1080p","2160p","DVDrip"]
+    didnotwork = []
     counter = 0
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
@@ -156,6 +177,7 @@ def rename():
             counter+=1
             winnername = combinename()
         except:
+            didnotwork.append(name)
             continue
         print(winnername)
         if os.path.isdir(root.directory+"/"+temp):
@@ -171,7 +193,11 @@ def rename():
         elif os.path.isfile(root.directory+"/"+temp):
             extension = pathlib.Path(temp).suffix
             os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
-        populate()
+    populate()
+    if counter == len(names):
+        messagebox.showinfo("Result","Renaming Successful")
+    else:
+        displaydidnotwork()
 
 
 def selectformat(event):
