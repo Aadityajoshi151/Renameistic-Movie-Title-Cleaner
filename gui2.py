@@ -107,7 +107,7 @@ def displaydidnotwork():
     newdisplaybox.pack()
     for x in didnotwork:
         newdisplaybox.insert(END,x)
-    okbtn = Button(dnw,text="OK",command=dnw.destroy,padx=10)
+    okbtn = ttk.Button(dnw,text="OK",command=dnw.destroy,padx=10)
     okbtn.pack(padx=10,pady=10)
 
 
@@ -214,7 +214,7 @@ root = Tk()
 global currversion
 currversion = "1.0"
 root.title("Movie Renamer "+currversion)
-root.geometry("400x500")
+root.geometry("400x430")
 
 extras = Menu(root)
 root.config(menu=extras)
