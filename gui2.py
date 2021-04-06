@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
+from tkinter import ttk
 import os
 import re
 import webbrowser
@@ -235,11 +236,11 @@ formats = [
 "Movie Name (Year) [Quality] {Filesize}"
 ]
 
-pathfield = Entry(root,width=60)
+pathfield = ttk.Entry(root,width=60)
 pathfield.pack(padx=10,pady=10)
 pathfield.bind("<Return>",enterpressed)
 
-browzebutton = Button(root,text="Browse",command=browse)
+browzebutton = ttk.Button(root,text="Browse",command=browse)
 browzebutton.pack(padx=10,pady=10)
 
 displaybox = Listbox(scrollframe,width=60,selectmode=EXTENDED,yscrollcommand=yscroll.set,xscrollcommand=xscroll.set)
@@ -251,21 +252,21 @@ xscroll.pack(side=BOTTOM,fill=X)
 scrollframe.pack()
 displaybox.pack()
 
-selectallbtn = Button(root,text="Select All",state=DISABLED,command=selectall)
+selectallbtn = ttk.Button(root,text="Select All",state=DISABLED,command=selectall)
 selectallbtn.pack(padx=10,pady=10)
 
 formatdd = OptionMenu(root,selectedformat,*formats,command=selectformat)
 formatdd.config(width=40,pady=5)
 formatdd.pack(pady=10)
 
-subfoldercheckbox = Checkbutton(text = "Rename Video Files Inside Folder As Well (Only 1 Level)", variable = subfoldercheck,
+subfoldercheckbox = ttk.Checkbutton(text = "Rename Video Files Inside Folder As Well (Only 1 Level)", variable = subfoldercheck,
                  onvalue = 1, offvalue = 0,)
 subfoldercheckbox.pack()
 
 updatebutton = Button(root,text="Check For Updates",command=update)
 updatebutton.pack(side=LEFT,padx=10,pady=10)
 
-renamebutton = Button(root,text="Rename",padx=15,pady=15,command=rename,fg="green")
+renamebutton = ttk.Button(root,text="Rename",command=rename)
 renamebutton.pack(side=RIGHT,padx=10,pady=10)
 
 root.mainloop()
