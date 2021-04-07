@@ -85,10 +85,11 @@ def populate():
 
 def browse():
     root.directory = filedialog.askdirectory()
-    pathfield.delete(0,END)
-    pathfield.insert(0,root.directory)
-    populate()
-    selectallbtn.config(state=ACTIVE)
+    if not root.directory == "":
+        pathfield.delete(0,END)
+        pathfield.insert(0,root.directory)
+        populate()
+        selectallbtn.config(state=ACTIVE)
 
 def selectall():
     displaybox.select_set(0,END)
@@ -107,7 +108,7 @@ def displaydidnotwork():
     newdisplaybox.pack()
     for x in didnotwork:
         newdisplaybox.insert(END,x)
-    okbtn = ttk.Button(dnw,text="OK",command=dnw.destroy,padx=10)
+    okbtn = ttk.Button(dnw,text="OK",command=dnw.destroy)
     okbtn.pack(padx=10,pady=10)
 
 
@@ -127,85 +128,90 @@ def rename():
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
     print(names)
-    for name in names:
-        name=name.replace("📁 ","")
-        name=name.replace("📄 ","")
-        temp = name
-        finalquality = ""
-        filesize=0
-        #FILE SIZE CODE BEGINS HERE
-        if os.path.isdir(root.directory+"/"+temp):
-            for ele in os.scandir(root.directory+"/"+temp):
-                filesize+=os.path.getsize(ele)
-        else:      
-            filesize = os.path.getsize(root.directory+"/"+temp)
-        print(filesize)
-        n = 0
-        power=2**10
-        power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
-        while filesize > power:
-            filesize /= power
-            n += 1
-        filesize=str(str(round(filesize,1))+" "+str(power_labels[n])+"B")
-        print(filesize)
-        #FILE SIZE CODE ENDS HERE
-        print("Old Title: - "+name)
-        flag = False
-        try:
-            for i in qualities:
-                if name.lower().find(i.lower())>-1:
-                    finalquality = i
-                    name = name.replace(finalquality,"")
-                    flag = True
-                    break
-            #Finding out if folder is individual or collection
-            if re.search("\d{4}-\d{4}", name): #A Collection
-                year = re.findall("\d{4}-\d{4}", name)
-            else:
-                year = re.findall('([1-3][0-9]{3})', name) #Individual
-                while True:
-                    if int(year[-1]) < 1880:
-                        del year[-1]
-                    else:
+    if names:
+        for name in names:
+            name=name.replace("📁 ","")
+            name=name.replace("📄 ","")
+            temp = name
+            finalquality = ""
+            filesize=0
+            #FILE SIZE CODE BEGINS HERE
+            if os.path.isdir(root.directory+"/"+temp):
+                for ele in os.scandir(root.directory+"/"+temp):
+                    filesize+=os.path.getsize(ele)
+            else:      
+                filesize = os.path.getsize(root.directory+"/"+temp)
+            print(filesize)
+            n = 0
+            power=2**10
+            power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
+            while filesize > power:
+                filesize /= power
+                n += 1
+            filesize=str(str(round(filesize,1))+" "+str(power_labels[n])+"B")
+            print(filesize)
+            #FILE SIZE CODE ENDS HERE
+            print("Old Title: - "+name)
+            flag = False
+            try:
+                for i in qualities:
+                    if name.lower().find(i.lower())>-1:
+                        finalquality = i
+                        name = name.replace(finalquality,"")
+                        flag = True
                         break
-            finaltitle = name[:name.find(year[-1])-1]
-            finaltitle = finaltitle.replace("."," ")
-            finaltitle = finaltitle.replace("_"," ")
-            finaltitle = finaltitle.rstrip()
-            #removing [anything] prefix from title if present
-            if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
-                finaltitle =finaltitle.split(" ", 1)[1]
-            
-            finaltitle = titlecase(finaltitle)
-            counter+=1
-            winnername = combinename()
-        except:
-            didnotwork.append(name)
-            continue
-        print(winnername)
-        if os.path.isdir(root.directory+"/"+temp):
-            os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
-            if subfoldercheck.get() == 1:
-                commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
-                subfiles = {}          
-                for j in os.listdir(root.directory+"/"+winnername):
-                    if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
-                        subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
-                subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
-                os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
-        elif os.path.isfile(root.directory+"/"+temp):
-            extension = pathlib.Path(temp).suffix
-            os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
-    populate()
-    if counter == len(names):
-        messagebox.showinfo("Result","Renaming Successful")
+                #Finding out if folder is individual or collection
+                if re.search("\d{4}-\d{4}", name): #A Collection
+                    year = re.findall("\d{4}-\d{4}", name)
+                else:
+                    year = re.findall('([1-3][0-9]{3})', name) #Individual
+                    while True:
+                        if int(year[-1]) < 1880:
+                            del year[-1]
+                        else:
+                            break
+                finaltitle = name[:name.find(year[-1])-1]
+                finaltitle = finaltitle.replace("."," ")
+                finaltitle = finaltitle.replace("_"," ")
+                finaltitle = finaltitle.rstrip()
+                #removing [anything] prefix from title if present
+                if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
+                    finaltitle =finaltitle.split(" ", 1)[1]
+                
+                finaltitle = titlecase(finaltitle)
+                counter+=1
+                winnername = combinename()
+            except:
+                didnotwork.append(name)
+                continue
+            print(winnername)
+            if os.path.isdir(root.directory+"/"+temp):
+                os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
+                if subfoldercheck.get() == 1:
+                    commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
+                    subfiles = {}          
+                    for j in os.listdir(root.directory+"/"+winnername):
+                        if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
+                            subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
+                    subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
+                    os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
+            elif os.path.isfile(root.directory+"/"+temp):
+                extension = pathlib.Path(temp).suffix
+                os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
+        populate()
+        if counter == len(names):
+            messagebox.showinfo("Result","Renaming Successful")
+        else:
+            displaydidnotwork()
     else:
-        displaydidnotwork()
+        messagebox.showerror("No Item Selected","Please select at least 1 item from the list")
+
 
 
 def selectformat(event):
     global finalformat
     finalformat = selectedformat.get()
+    renamebutton.config(state=ACTIVE)
     if finalformat.find("Quality")>-1:
         messagebox.showinfo("Title","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
 
@@ -276,7 +282,7 @@ subfoldercheckbox = ttk.Checkbutton(text = "Rename Video Files Inside Folder As 
                  onvalue = 1, offvalue = 0,)
 subfoldercheckbox.pack()
 
-renamebutton = ttk.Button(root,text="Rename",command=rename)
+renamebutton = ttk.Button(root,text="Rename",command=rename,state=DISABLED)
 renamebutton.pack(side=RIGHT,padx=10,pady=10)
 
 root.mainloop()
