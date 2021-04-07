@@ -8,9 +8,7 @@ import webbrowser
 import urllib.request
 from titlecase import titlecase
 import pathlib
-
-def openportfolio():
-    webbrowser.open_new("https://aadityajoshi151.github.io/")
+    
 def update():
     try:
         newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Anagram-Generator/master/Version.txt").read()
@@ -76,12 +74,16 @@ def combinename():
         else:
             return (f"{finaltitle} ({year[-1]}) [{finalquality}] {{{filessize}}}")    
 def populate():
-    displaybox.delete(0,END)
-    for i in os.listdir(root.directory):
-        if os.path.isdir(root.directory+"/"+i):
-            displaybox.insert(END,"📁 "+i)
-        elif os.path.isfile(root.directory+"/"+i):
-            displaybox.insert(END,"📄 "+i)
+    try:
+        displaybox.delete(0,END)
+        for i in os.listdir(root.directory):
+            if os.path.isdir(root.directory+"/"+i):
+                displaybox.insert(END,"📁 "+i)
+            elif os.path.isfile(root.directory+"/"+i):
+                displaybox.insert(END,"📄 "+i)
+        selectallbtn.config(state=ACTIVE)
+    except:
+        messagebox.showerror("Invalid Path","Please enter or select a valid path")
 
 def browse():
     root.directory = filedialog.askdirectory()
@@ -89,17 +91,18 @@ def browse():
         pathfield.delete(0,END)
         pathfield.insert(0,root.directory)
         populate()
-        selectallbtn.config(state=ACTIVE)
+        
 
 def selectall():
     displaybox.select_set(0,END)
 
 def displaydidnotwork():
+    root.bell()
     dnw = Toplevel()
     dnw.attributes("-toolwindow", True)
     newscrollframe = Frame(dnw)
     newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
-    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The Following {len(names)-counter} files were not renamed due to lack of information in their title")
+    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title")
     lbl.pack(padx=10,pady=10)
     newdisplaybox = Listbox(newscrollframe,width=60,selectmode=EXTENDED,yscrollcommand=newyscroll.set,height=5)
     newyscroll.config(command=newdisplaybox.yview)
@@ -122,7 +125,7 @@ def rename():
     global finaltitle
     global didnotwork
     global counter
-    qualities = ["480p","720p","1080p","2160p","DVDrip"]
+    qualities = ["480p","720p","1080p","2160p","DVDrip","CAMRip","DVDSCR","HDRip"]
     didnotwork = []
     counter = 0
     for i in displaybox.curselection():
@@ -225,11 +228,13 @@ root.geometry("400x430")
 extras = Menu(root)
 root.config(menu=extras)
 extrasmenu = Menu(extras,tearoff=False)
-extras.add_cascade(label="Extras",menu=extrasmenu)
+extras.add_cascade(label="Help",menu=extrasmenu)
+# extrasmenu.add_command(label = "📜 Instructions")
+# extrasmenu.add_separator()
 extrasmenu.add_command(label = "🌐 Check for Updates",command=update)
-extrasmenu.add_command(label = "👦 About",command=openportfolio)
 extrasmenu.add_command(label = "📮 Contact Developer")
-extrasmenu.add_command(label = "💰 Donate")
+extrasmenu.add_separator()
+extrasmenu.add_command(label = "👦 About",command=lambda: webbrowser.open_new("https://aadityajoshi151.github.io/"))
 
 scrollframe = Frame(root)
 yscroll = Scrollbar(scrollframe,orient=VERTICAL)
