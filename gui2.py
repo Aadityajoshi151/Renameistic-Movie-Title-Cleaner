@@ -70,9 +70,9 @@ def combinename():
             return (f"{finaltitle} [{finalquality}] ({filesize})")
     elif finalformat == formats[11]:
         if finalquality == "":
-            return (f"{finaltitle} ({year[-1]}) {{{filessize}}}")
+            return (finaltitle+" ("+year[-1]+") {"+filesize+"}")
         else:
-            return (f"{finaltitle} ({year[-1]}) [{finalquality}] {{{filessize}}}")    
+            return (finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+filesize+"}")    
 def populate():
     try:
         displaybox.delete(0,END)
