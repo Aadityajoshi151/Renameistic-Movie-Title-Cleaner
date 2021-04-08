@@ -104,7 +104,7 @@ def displaydidnotwork():
     newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
     lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title")
     lbl.pack(padx=10,pady=10)
-    newdisplaybox = Listbox(newscrollframe,width=60,selectmode=EXTENDED,yscrollcommand=newyscroll.set,height=5)
+    newdisplaybox = Listbox(newscrollframe,width=60,yscrollcommand=newyscroll.set,height=5)
     newyscroll.config(command=newdisplaybox.yview)
     newyscroll.pack(side=RIGHT,fill=Y)
     newscrollframe.pack()
