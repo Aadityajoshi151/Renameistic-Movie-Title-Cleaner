@@ -114,6 +114,8 @@ def displaydidnotwork():
     okbtn = ttk.Button(dnw,text="OK",command=dnw.destroy)
     okbtn.pack(padx=10,pady=10)
 
+def easteregg(event=None):
+    messagebox.showinfo("🎉🎉 Easter Egg 🎉🎉","CONGRATULATIONS from Aaditya Joshi (developer) on discovering this easter egg. It appears when you middle-click on the browse button.")
 
 def rename():
     global names
@@ -266,6 +268,7 @@ pathfield.bind("<Return>",enterpressed)
 
 browzebutton = ttk.Button(root,text="Browse",command=browse)
 browzebutton.pack(padx=10,pady=10)
+browzebutton.bind("<Button-2>",easteregg)
 
 displaybox = Listbox(scrollframe,width=60,selectmode=EXTENDED,yscrollcommand=yscroll.set,xscrollcommand=xscroll.set)
 
