@@ -142,8 +142,10 @@ def rename():
             filesize=0
             #FILE SIZE CODE BEGINS HERE
             if os.path.isdir(root.directory+"/"+temp):
-                for ele in os.scandir(root.directory+"/"+temp):
-                    filesize+=os.path.getsize(ele)
+                for path, dirs, files in os.walk(root.directory+"/"+temp):
+                    for f in files:
+                        fp = os.path.join(path, f)
+                        filesize += os.stat(fp).st_size
             else:      
                 filesize = os.path.getsize(root.directory+"/"+temp)
             print(filesize)
