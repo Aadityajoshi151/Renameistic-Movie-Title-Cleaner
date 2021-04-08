@@ -195,13 +195,16 @@ def rename():
             if os.path.isdir(root.directory+"/"+temp):
                 os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
                 if subfoldercheck.get() == 1:
-                    commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
-                    subfiles = {}          
-                    for j in os.listdir(root.directory+"/"+winnername):
-                        if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
-                            subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
-                    subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
-                    os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
+                    try:
+                        commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
+                        subfiles = {}          
+                        for j in os.listdir(root.directory+"/"+winnername):
+                            if pathlib.Path(root.directory+"/"+winnername+"/"+j).suffix in commonextensions:
+                                subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
+                        subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
+                        os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
+                    except:
+                        pass
             elif os.path.isfile(root.directory+"/"+temp):
                 extension = pathlib.Path(temp).suffix
                 os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
