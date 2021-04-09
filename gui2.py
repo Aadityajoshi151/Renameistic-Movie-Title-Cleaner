@@ -231,6 +231,7 @@ global currversion
 currversion = "1.0"
 root.title("Renameistic "+currversion)
 root.geometry("400x450")
+root.resizable("False","False")
 root.iconbitmap("icon.ico")
 
 extras = Menu(root)
@@ -240,7 +241,7 @@ extras.add_cascade(label="Help",menu=extrasmenu)
 # extrasmenu.add_command(label = "📜 Instructions")
 # extrasmenu.add_separator()
 extrasmenu.add_command(label = "🌐 Check for Updates",command=update)
-extrasmenu.add_command(label = "📮 Contact Developer")
+extrasmenu.add_command(label = "📮 Contact Developer",command=lambda: webbrowser.open_new("https://forms.gle/xYzrbwYoicHu5zHX6"))
 extrasmenu.add_separator()
 extrasmenu.add_command(label = "👦 About",command=lambda: webbrowser.open_new("https://aadityajoshi151.github.io/"))
 
