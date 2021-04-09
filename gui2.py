@@ -11,14 +11,14 @@ import pathlib
     
 def update():
     try:
-        newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Anagram-Generator/master/Version.txt").read()
+        newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/main/version.txt").read()
         newversion = newversion.decode('utf-8').split()[0]
         if currversion == newversion:
             messagebox.showinfo("Latest Version Detected","You are running the latest version. No update required.")
         else:
             ans = messagebox.askyesno("New Version Available","A newer version (v"+newversion+") is available for download. Would you like to download it now?")
             if ans:
-                webbrowser.open_new("www.google.co.in")
+                webbrowser.open_new("https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner")
     except:
         messagebox.showerror("An Error Occurred","There was a problem connecting with the server. Please check your internet connection or try again later.")
 
