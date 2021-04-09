@@ -91,8 +91,15 @@ def browse():
         pathfield.delete(0,END)
         pathfield.insert(0,root.directory)
         populate()
-        
 
+def openFeedbackForm():
+    webbrowser.open_new("https://forms.gle/xYzrbwYoicHu5zHX6")
+
+def copytoclip():
+    root.clipboard_clear()
+    root.clipboard_append("\n".join(i for i in didnotwork))
+    openFeedbackForm()
+        
 def selectall():
     displaybox.select_set(0,END)
 
@@ -102,9 +109,9 @@ def displaydidnotwork():
     dnw.attributes("-toolwindow", True)
     newscrollframe = Frame(dnw)
     newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
-    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title")
+    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title.\nYou can copy and submit these titles on feedback form to help the developer.")
     lbl.pack(padx=10,pady=10)
-    newdisplaybox = Listbox(newscrollframe,width=60,yscrollcommand=newyscroll.set,height=5)
+    newdisplaybox = Listbox(newscrollframe,width=60,selectmode=EXTENDED,yscrollcommand=newyscroll.set,height=5)
     newyscroll.config(command=newdisplaybox.yview)
     newyscroll.pack(side=RIGHT,fill=Y)
     newscrollframe.pack()
@@ -112,7 +119,9 @@ def displaydidnotwork():
     for x in didnotwork:
         newdisplaybox.insert(END,x)
     okbtn = ttk.Button(dnw,text="OK",command=dnw.destroy)
-    okbtn.pack(padx=10,pady=10)
+    okbtn.pack(padx=10,pady=10,side=RIGHT)
+    testbtn = ttk.Button(dnw,text="Copy And Open Feedback Form",command=copytoclip)
+    testbtn.pack(padx=10,pady=10,side=LEFT)
 
 def easteregg(event=None):
     messagebox.showinfo("🎉🎉 Easter Egg 🎉🎉","CONGRATULATIONS from Aaditya Joshi (developer) on discovering this easter egg. It appears when you middle-click on the browse button.")
@@ -241,7 +250,7 @@ extras.add_cascade(label="Help",menu=extrasmenu)
 # extrasmenu.add_command(label = "📜 Instructions")
 # extrasmenu.add_separator()
 extrasmenu.add_command(label = "🌐 Check for Updates",command=update)
-extrasmenu.add_command(label = "📮 Contact Developer",command=lambda: webbrowser.open_new("https://forms.gle/xYzrbwYoicHu5zHX6"))
+extrasmenu.add_command(label = "📮 Feedback",command=openFeedbackForm)
 extrasmenu.add_separator()
 extrasmenu.add_command(label = "👦 About",command=lambda: webbrowser.open_new("https://aadityajoshi151.github.io/"))
 
