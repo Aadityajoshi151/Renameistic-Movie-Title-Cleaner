@@ -229,8 +229,9 @@ def selectformat(event):
 root = Tk()
 global currversion
 currversion = "1.0"
-root.title("Movie Renamer "+currversion)
-root.geometry("400x430")
+root.title("Renameistic "+currversion)
+root.geometry("400x450")
+root.iconbitmap("icon.ico")
 
 extras = Menu(root)
 root.config(menu=extras)
