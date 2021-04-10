@@ -232,7 +232,7 @@ def selectformat(event):
     finalformat = selectedformat.get()
     renamebutton.config(state=ACTIVE)
     if finalformat.find("Quality")>-1:
-        messagebox.showinfo("Title","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
+        messagebox.showinfo("Quality","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
 
 
 root = Tk()
