@@ -141,7 +141,6 @@ def rename():
     counter = 0
     for i in displaybox.curselection():
         names.append(displaybox.get(i))
-    print(names)
     if names:
         for name in names:
             name=name.replace("📁 ","")
@@ -157,7 +156,6 @@ def rename():
                         filesize += os.stat(fp).st_size
             else:      
                 filesize = os.path.getsize(root.directory+"/"+temp)
-            print(filesize)
             n = 0
             power=2**10
             power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
@@ -165,9 +163,7 @@ def rename():
                 filesize /= power
                 n += 1
             filesize=str(str(round(filesize,1))+" "+str(power_labels[n])+"B")
-            print(filesize)
             #FILE SIZE CODE ENDS HERE
-            print("Old Title: - "+name)
             flag = False
             try:
                 for i in qualities:
@@ -200,7 +196,6 @@ def rename():
             except:
                 didnotwork.append(name)
                 continue
-            print(winnername)
             if os.path.isdir(root.directory+"/"+temp):
                 os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
                 if subfoldercheck.get() == 1:
@@ -226,7 +221,6 @@ def rename():
         messagebox.showerror("No Item Selected","Please select at least 1 item from the list")
 
 
-
 def selectformat(event):
     global finalformat
     finalformat = selectedformat.get()
@@ -241,7 +235,7 @@ currversion = "1.0"
 root.title("Renameistic "+currversion)
 root.geometry("400x450")
 root.resizable("False","False")
-root.iconbitmap("icon.ico")
+root.iconbitmap(default="icon.ico")
 
 extras = Menu(root)
 root.config(menu=extras)
