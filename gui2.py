@@ -134,10 +134,10 @@ def easteregg(event=None):
 
 def rename():
     global names
-    names = []
+    names = []   #has selected names from the listbox
     global finalquality
     global filesize
-    global flag
+    global flag  #for finding if quality is present or not
     global year
     global finaltitle
     global didnotwork
@@ -145,23 +145,23 @@ def rename():
     qualities = ["480p","720p","1080p","2160p","DVDrip","CAMRip","DVDSCR","HDRip"]
     didnotwork = []
     counter = 0
-    for i in displaybox.curselection():
+    for i in displaybox.curselection():  #selected names from listbox are append in names[]
         names.append(displaybox.get(i))
-    if names:
+    if names:  #if names[] is has something
         for name in names:
-            name=name.replace("📁 ","")
-            name=name.replace("📄 ","")
+            name=name.replace("📁 ","")  #removes folder icon
+            name=name.replace("📄 ","")  #removes file icon
             temp = name
             finalquality = ""
             filesize=0
             #FILE SIZE CODE BEGINS HERE
-            if os.path.isdir(root.directory+"/"+temp):
+            if os.path.isdir(root.directory+"/"+temp):  #folder-size calculation
                 for path, dirs, files in os.walk(root.directory+"/"+temp):
                     for f in files:
                         fp = os.path.join(path, f)
                         filesize += os.stat(fp).st_size
             else:      
-                filesize = os.path.getsize(root.directory+"/"+temp)
+                filesize = os.path.getsize(root.directory+"/"+temp)  #file size is simply returned
             n = 0
             power=2**10
             power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
@@ -175,7 +175,7 @@ def rename():
                 for i in qualities:
                     if name.lower().find(i.lower())>-1:
                         finalquality = i
-                        name = name.replace(finalquality,"")
+                        name = name.replace(finalquality,"")  #removes finalquality from title so no confusion occurs when year is calculated
                         flag = True
                         break
                 #Finding out if folder is individual or collection
