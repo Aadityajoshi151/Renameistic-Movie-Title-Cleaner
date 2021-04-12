@@ -26,10 +26,11 @@ def update():
 
 
 def enterpressed(event=None):
-    root.directory = pathfield.get()
-    populate()
+    root.directory = pathfield.get()  #when enter key is pressed when textfield is active, its fetches its value
+    populate()  #listbox is populated with the root directory contents
 
-def combinename():
+def combinename():  #The most important function of program
+    #return f strings based on the user selected format
     if finalformat == formats[0]:
         return (f"{finaltitle}")
     elif finalformat == formats[1]:
@@ -71,34 +72,36 @@ def combinename():
         else:    
             return (f"{finaltitle} [{finalquality}] ({filesize})")
     elif finalformat == formats[11]:
+        #this does not return f string beacuse of the need of {} in the string itself.
         if finalquality == "":
             return (finaltitle+" ("+year[-1]+") {"+filesize+"}")
         else:
             return (finaltitle+" ("+year[-1]+") ["+finalquality+"] {"+filesize+"}")    
+
 def populate():
     try:
-        displaybox.delete(0,END)
+        displaybox.delete(0,END)  #clears previous values from listbox
         for i in os.listdir(root.directory):
             if os.path.isdir(root.directory+"/"+i):
-                displaybox.insert(END,"📁 "+i)
+                displaybox.insert(END,"📁 "+i) #appends folder icon and puts folder in listbox
             elif os.path.isfile(root.directory+"/"+i):
-                displaybox.insert(END,"📄 "+i)
-        selectallbtn.config(state=ACTIVE)
+                displaybox.insert(END,"📄 "+i) #appends file icon and puts file in listbox
+        selectallbtn.config(state=ACTIVE)  #enables select-all button
     except:
         messagebox.showerror("Invalid Path","Please enter or select a valid path")
 
 def browse():
-    root.directory = filedialog.askdirectory()
-    if not root.directory == "":
-        pathfield.delete(0,END)
-        pathfield.insert(0,root.directory)
+    root.directory = filedialog.askdirectory()  #displays open folder dialog
+    if not root.directory == "":  #dialog return string. if cancel button is clicked, this condition will be false
+        pathfield.delete(0,END)   #clears the textfielf
+        pathfield.insert(0,root.directory)  #puts the path of the directory selected in the textfield
         populate()
 
 def openFeedbackForm():
     webbrowser.open_new("https://forms.gle/xYzrbwYoicHu5zHX6")
 
 def copytoclip():
-    root.clipboard_clear()
+    root.clipboard_clear() 
     root.clipboard_append("\n".join(i for i in didnotwork))
     openFeedbackForm()
         
@@ -106,9 +109,10 @@ def selectall():
     displaybox.select_set(0,END)
 
 def displaydidnotwork():
-    root.bell()
+    root.bell()   #to make sound
     dnw = Toplevel()
-    dnw.attributes("-toolwindow", True)
+    dnw.attributes("-toolwindow", True) #removes icon,minimize,mazimize buttons from window
+    dnw.resizable("False","False")  
     newscrollframe = Frame(dnw)
     newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
     lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title(s).\nYou can copy and submit these titles on feedback form to help the developer.")
