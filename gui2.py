@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 from tkinter import ttk      #for modern looking widgets
-from titlecase import titlecase    #For final name in captial letters 
+from titlecase import titlecase    #for final name in captial letters 
 import os     #for renaming and opening/walking directories
 import re     #for finding year (4-digit numbers)
 import webbrowser   #for opening feedback form,portfolio and download page
@@ -179,16 +179,16 @@ def rename():
                         flag = True
                         break
                 #Finding out if folder is individual or collection
-                if re.search("\d{4}-\d{4}", name): #A Collection
+                if re.search("\d{4}-\d{4}", name): #A Collection example (2005-2010)
                     year = re.findall("\d{4}-\d{4}", name)
                 else:
-                    year = re.findall('([1-3][0-9]{3})', name) #Individual
+                    year = re.findall('([1-3][0-9]{3})', name) #Individual example (2013)
                     while True:
                         if int(year[-1]) < 1880:
                             del year[-1]
                         else:
                             break
-                finaltitle = name[:name.find(year[-1])-1]
+                finaltitle = name[:name.find(year[-1])-1]  #everything before year is the title
                 finaltitle = finaltitle.replace("."," ")
                 finaltitle = finaltitle.replace("_"," ")
                 finaltitle = finaltitle.rstrip()
@@ -196,15 +196,15 @@ def rename():
                 if re.search("[\[].*?[\]]",finaltitle.split(" ")[0]):   
                     finaltitle =finaltitle.split(" ", 1)[1]
                 
-                finaltitle = titlecase(finaltitle)
+                finaltitle = titlecase(finaltitle)  #title is converted in captial letters
                 counter+=1
-                winnername = combinename()
+                winnername = combinename()  #combinename returns the appropriate string based on selected format
             except:
                 didnotwork.append(name)
                 continue
-            if os.path.isdir(root.directory+"/"+temp):
+            if os.path.isdir(root.directory+"/"+temp):  #if it was a folder
                 os.rename(root.directory+"/"+temp,root.directory+"/"+winnername)
-                if subfoldercheck.get() == 1:
+                if subfoldercheck.get() == 1:  #if sub-file chekbox is checked
                     try:
                         commonextensions = [".mkv",".avi",".mp4",".wmv",".mov",".flv",]
                         subfiles = {}          
@@ -213,15 +213,16 @@ def rename():
                                 subfiles[j] = os.path.getsize(root.directory+"/"+winnername+"/"+j)
                         subextension = pathlib.Path(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get)).suffix
                         os.rename(root.directory+"/"+winnername+"/"+max(subfiles, key=subfiles.get),root.directory+"/"+winnername+"/"+winnername+subextension)
+                        #the biggest file with a video extension is renamed same as the folder
                     except:
-                        pass
+                        pass   #if the folder contains more folders so sub-renaming does not occur
             elif os.path.isfile(root.directory+"/"+temp):
                 extension = pathlib.Path(temp).suffix
                 os.rename(root.directory+"/"+temp,root.directory+"/"+winnername+extension)
-        populate()
-        if counter == len(names):
+        populate()  #the newly renamed titles appear in the listbox
+        if counter == len(names):  #all titles were renamed
             messagebox.showinfo("Result","Renaming Successful")
-        else:
+        else:   #some of the titles were not renamed
             displaydidnotwork()
     else:
         messagebox.showerror("No Item Selected","Please select at least 1 item from the list")
@@ -229,23 +230,23 @@ def rename():
 
 def selectformat(event):
     global finalformat
-    finalformat = selectedformat.get()
-    renamebutton.config(state=ACTIVE)
-    if finalformat.find("Quality")>-1:
+    finalformat = selectedformat.get()  #fetches selected format from dropdown
+    renamebutton.config(state=ACTIVE)   #enables rename button
+    if finalformat.find("Quality")>-1:  #if 'quality' is present
         messagebox.showinfo("Quality","You have selected format which involves 'quality'. If 'quality' is not present in the title, it will be omitted.")
 
 
 root = Tk()
 global currversion
-currversion = "1.0"
-root.title("Renameistic "+currversion)
-root.geometry("400x450")
-root.resizable("False","False")
-root.iconbitmap(default="icon.ico")
+currversion = "1.0"  #current version
+root.title("Renameistic "+currversion)  #title bar
+root.geometry("400x450")  #size
+root.resizable("False","False") #non-resizable window
+root.iconbitmap(default="icon.ico") #icon
 
 extras = Menu(root)
 root.config(menu=extras)
-extrasmenu = Menu(extras,tearoff=False)
+extrasmenu = Menu(extras,tearoff=False)  #removes dotted line from menu
 extras.add_cascade(label="Help",menu=extrasmenu)
 # extrasmenu.add_command(label = "📜 Instructions")
 # extrasmenu.add_separator()
