@@ -1,18 +1,20 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
-from tkinter import ttk
-import os
-import re
-import webbrowser
-import urllib.request
-from titlecase import titlecase
-import pathlib
+from tkinter import ttk      #for modern looking widgets
+from titlecase import titlecase    #For final name in captial letters 
+import os     #for renaming and opening/walking directories
+import re     #for finding year (4-digit numbers)
+import webbrowser   #for opening feedback form,portfolio and download page
+import urllib.request   #for checking txt file for updates
+import pathlib   #has the suffix() method used for finding extensions
     
 def update():
     try:
         newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/main/version.txt").read()
+        #reading file from github
         newversion = newversion.decode('utf-8').split()[0]
+        #removing the letter 'b' which is there as a prefix in file contents
         if currversion == newversion:
             messagebox.showinfo("Latest Version Detected","You are running the latest version. No update required.")
         else:
@@ -109,7 +111,7 @@ def displaydidnotwork():
     dnw.attributes("-toolwindow", True)
     newscrollframe = Frame(dnw)
     newyscroll = Scrollbar(newscrollframe,orient=VERTICAL) 
-    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title.\nYou can copy and submit these titles on feedback form to help the developer.")
+    lbl = Label(dnw,text=f"Renamed {counter}/{len(names)} files successfully.\n The following {len(names)-counter} files were not renamed due to lack of information in their title(s).\nYou can copy and submit these titles on feedback form to help the developer.")
     lbl.pack(padx=10,pady=10)
     newdisplaybox = Listbox(newscrollframe,width=60,selectmode=EXTENDED,yscrollcommand=newyscroll.set,height=5)
     newyscroll.config(command=newdisplaybox.yview)
