@@ -2,7 +2,7 @@
 
 ## 📥 Download Latest Version for Windows:
 
-Version 1.0 -  Click [here](https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/1.0/Renameistic.v1.0.rar "here") To Download
+Version 1.0 - Click [here](https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar "here") To Download
 
 Watch the demo video [here](https://www.youtube.com/watch?v=4Mop0vC_yq0 "here")
 
@@ -10,7 +10,7 @@ Watch the demo video [here](https://www.youtube.com/watch?v=4Mop0vC_yq0 "here")
 
 We all have movies downloaded or taken from someone else that looks something like this: **The.Movie.Name.Goes.Here.2021.720p.WebDL.x265.HEVC--somesuffixhere**
 
-Ask anyone, this naming style does not look good. The only reason we keep it this way is that no one wants to go through the painstaking process of editing all of their movie titles one by one. 
+Ask anyone, this naming style does not look good. The only reason we keep it this way is that no one wants to go through the painstaking process of editing all of their movie titles one by one.
 
 This is where **Renameistic** comes into play
 
@@ -22,7 +22,7 @@ A simple utility to clean all your movie titles with just one click. No more unn
 - **Works Offline:** Unlike similar softwares, renameistic does not use IMDB/MovieDB API to work therefore completely eliminating the need for an internet connection. (Unless checking for updates).
 - **No Database:** Works on the concept of string manipulation.
 - **Multiple Formats:** Total 12 as of now.
-- **Will Receive Regualar Updates:** To improve performance and add new  features.
+- **Will Receive Regualar Updates:** To improve performance and add new features.
 - **Portable:** No Installation Required.
 - **Lightweight:** File size is 9 MB.
 
