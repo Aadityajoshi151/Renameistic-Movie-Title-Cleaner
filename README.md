@@ -1,10 +1,16 @@
+**📢 Due to a recent change made in repos, if the "check for updates" feature is giving you trouble, please download the latest version from below and it will be fixed.**
+
 # Renameistic - Movie Title Cleaner
 
-## 📥 Download Latest Version for Windows:
+## 📥 Download Latest Version:
 
-Version 1.0 - Click [here](https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar "here") To Download
+<a href="https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar" alt="Download For Windows">
+        <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
+<a href="#" alt="Download For Windows">
+        <img src="https://img.shields.io/badge/Download%20For%20Linux-Coming%20Soon!-blueviolet" /></a>
 
-Watch the demo video [here](https://www.youtube.com/watch?v=4Mop0vC_yq0 "here")
+<a href="https://www.youtube.com/watch?v=4Mop0vC_yq0" alt="Download For Windows">
+        <img src="https://img.shields.io/badge/Watch%20Tutorial-Youtube-red" /></a>
 
 ## 📝 Description:
 
@@ -37,7 +43,7 @@ A simple utility to clean all your movie titles with just one click. No more unn
 
 ## 📜 Instructions:
 
-**Step 1)** Download and extract renameistic from zip file. **Please keep the icon file and exe file in the same directory or else it will not work.**
+**Step 1)** Download and extract renameistic from zip file. **Please do not remove or change directory of the "assets" folder or else it will not work.**
 
 **Step 2)** Click on browse button and select the folder containing your movies. The box will be populated with the list.
 
