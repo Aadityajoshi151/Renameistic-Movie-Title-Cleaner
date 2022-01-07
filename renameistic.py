@@ -11,7 +11,7 @@ import pathlib   #has the suffix() method used for finding extensions
     
 def update():
     try:
-        newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/main/version.txt").read()
+        newversion = urllib.request.urlopen("https://raw.githubusercontent.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/master/version.txt").read()
         #reading file from github
         newversion = newversion.decode('utf-8').split()[0]
         #removing the letter 'b' which is there as a prefix in file contents
@@ -253,7 +253,7 @@ extras.add_cascade(label="Help",menu=extrasmenu)
 extrasmenu.add_command(label = "🌐 Check for Updates",command=update)
 extrasmenu.add_command(label = "📮 Feedback",command=openFeedbackForm)
 extrasmenu.add_separator()
-extrasmenu.add_command(label = "👦 About",command=lambda: webbrowser.open_new("https://aadityajoshi151.github.io/"))
+extrasmenu.add_command(label = "👦 About",command=lambda: webbrowser.open_new("https://github.com/Aadityajoshi151"))
 
 scrollframe = Frame(root)
 yscroll = Scrollbar(scrollframe,orient=VERTICAL)
