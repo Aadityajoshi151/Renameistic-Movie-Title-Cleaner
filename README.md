@@ -1,4 +1,4 @@
-**📢 Due to a recent change made in repos, if the "check for updates" feature is giving you trouble, please download the latest version from below and it will be fixed.**
+<p style="color:red;font-weight:bold;">📢 Due to a recent change made in repos, if the "check for updates" feature is giving you trouble, please download the latest version from below and it will be fixed.</p>
 
 # Renameistic - Movie Title Cleaner
 
@@ -6,11 +6,11 @@
 
 <a href="https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar" alt="Download For Windows">
         <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
-<a href="#" alt="Download For Windows">
-        <img src="https://img.shields.io/badge/Download%20For%20Linux-Coming%20Soon!-blueviolet" /></a>
+<a href="#" alt="Download For Linux">
+        <img src="https://img.shields.io/badge/Linux(Coming Soon!)-FCC624?style=for-the-badge&logo=linux&logoColor=black" /></a>
 
-<a href="https://www.youtube.com/watch?v=4Mop0vC_yq0" alt="Download For Windows">
-        <img src="https://img.shields.io/badge/Watch%20Tutorial-Youtube-red" /></a>
+<a href="https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar" alt="Watch Tutorial">
+        <img src="https://img.shields.io/badge/Watch Tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 
 ## 📝 Description:
 
