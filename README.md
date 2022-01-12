@@ -2,15 +2,18 @@
 
 # Renameistic - Movie Title Cleaner
 
-## 📥 Download Latest Version:
+## 📥 Download Latest Version (v1.0):
 
 <a href="https://github.com/Aadityajoshi151/Renameistic-Movie-Title-Cleaner/releases/download/v1.0/Renameistic.v1.0.rar" alt="Download For Windows">
         <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
+<a href="https://www.mediafire.com/file/056o78sarzl75yy/Renameistic.v1.0.rar/file" alt="Mirror Link For Windows">
+        <img src="https://img.shields.io/badge/Windows (Mirror)-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
+<br>
 <a href="#" alt="Download For Linux">
         <img src="https://img.shields.io/badge/Linux(Coming Soon!)-FCC624?style=for-the-badge&logo=linux&logoColor=black" /></a>
-
+<br>
 <a href="https://www.youtube.com/watch?v=4Mop0vC_yq0" alt="Watch Tutorial">
-        <img src="https://img.shields.io/badge/Watch Tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
+        <img src="https://img.shields.io/badge/Watch Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 
 ## 📝 Description:
 
@@ -18,7 +21,7 @@ We all have movies downloaded or taken from someone else that looks something li
 
 Ask anyone, this naming style does not look good. The only reason we keep it this way is that no one wants to go through the painstaking process of editing all of their movie titles one by one.
 
-This is where **Renameistic** comes into play
+This is where **Renameistic** comes into play.
 
 A simple utility to clean all your movie titles with just one click. No more unnecessary clutter in the titles. Yayy!
 
