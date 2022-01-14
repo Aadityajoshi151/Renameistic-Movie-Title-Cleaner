@@ -9,9 +9,6 @@
 <a href="https://www.mediafire.com/file/056o78sarzl75yy/Renameistic.v1.0.rar/file" alt="Mirror Link For Windows">
         <img src="https://img.shields.io/badge/Windows (Mirror)-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
 <br>
-<a href="#" alt="Download For Linux">
-        <img src="https://img.shields.io/badge/Linux(Coming Soon!)-FCC624?style=for-the-badge&logo=linux&logoColor=black" /></a>
-<br>
 <a href="https://www.youtube.com/watch?v=4Mop0vC_yq0" alt="Watch Tutorial">
         <img src="https://img.shields.io/badge/Watch Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white" /></a>
 
