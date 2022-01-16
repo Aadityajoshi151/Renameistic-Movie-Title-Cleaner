@@ -1,0 +1,1 @@
+titlecase==2.3

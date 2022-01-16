@@ -28,7 +28,7 @@ A simple utility to clean all your movie titles with just one click. No more unn
 - **Works Offline:** Unlike similar softwares, renameistic does not use IMDB/MovieDB API to work therefore completely eliminating the need for an internet connection. (Unless checking for updates).
 - **No Database:** Works on the concept of string manipulation.
 - **Multiple Formats:** Total 12 as of now.
-- **Will Receive Regualar Updates:** To improve performance and add new features.
+- **Will Receive Regular Updates:** To improve performance and add new features.
 - **Portable:** No Installation Required.
 - **Lightweight:** File size is 9 MB.
 
